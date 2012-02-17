@@ -1,23 +1,16 @@
-/* $Id: vumeter.cc 53 2007-09-06 21:50:05Z lennart $ */
+/*
+*Copyright 2004-2007 Lennart Poettering <mzihzrgre (at) 0pointer (dot) de>
+*Copyright (C) 2012 Openqbo Inc.
+*
+*This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+*
+*This program is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+*
+*You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+*/
 
-/***
-  This file is part of pavumeter.
- 
-  pavumeter is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published
-  by the Free Software Foundation; either version 2 of the License,
-  or (at your option) any later version.
- 
-  pavumeter is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-  General Public License for more details.
- 
-  You should have received a copy of the GNU General Public License
-  along with pavumeter; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
-  USA.
-***/
+
+
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
@@ -27,7 +20,6 @@
 #include <pulse/pulseaudio.h>
 #include <stdlib.h>
 #include <sstream>
-//#define LOGARITHMIC 1
 
 
 /*
@@ -64,6 +56,7 @@ int max_accum=5;
 int mic_volume=58;
 int front_volume=100;
 int master_front_volume=20;
+int mic_boost=0;
 std::string default_input="Front Mic";
 
 std::vector <float> accum_values (max_accum,0);
@@ -288,6 +281,7 @@ void read_parameters(){
     nh.getParam("max_accum",max_accum);
     nh.getParam("default_input",default_input);
     nh.getParam("mic_volume",mic_volume);
+    nh.getParam("mic_boost",mic_boost);
     nh.getParam("front_volume",front_volume);
     nh.getParam("master_front_volume",master_front_volume);
 
@@ -296,6 +290,7 @@ void read_parameters(){
     ROS_INFO("Max_accum:%d",max_accum);
     ROS_INFO("Default_input:%s",default_input.c_str());
     ROS_INFO("Mic_volume:%d%%", mic_volume);
+    ROS_INFO("Mic_boost_volume:%d%%", mic_boost);
     ROS_INFO("Front_volume:%d%%", front_volume);
     ROS_INFO("Master_front_volume:%d%%", master_front_volume);
 
@@ -311,14 +306,21 @@ void read_parameters(){
     system(instruction.c_str());
 
     volume_string.str("");
+    volume_string << mic_boost;
+    instruction="amixer set 'Front Mic Boost' "+volume_string.str()+"%";
+    system(instruction.c_str());
+
+    volume_string.str("");
     volume_string << front_volume;
     instruction="amixer set 'Front' "+volume_string.str()+"%";
     system(instruction.c_str());
 
     volume_string.str("");
     volume_string << master_front_volume;
-    instruction="amixer set 'Master Front' "+volume_string.str()+"%" + volume_string.str()+"%";
+    instruction="amixer set 'Master' "+volume_string.str()+"%" + volume_string.str()+"%";
     system(instruction.c_str());
+
+
 }
 
 void read_parameters_callback(const ros::TimerEvent&){
@@ -330,7 +332,7 @@ int main(int argc, char *argv[]) {
     ros::init(argc, argv , "audio_control");
     ros::NodeHandle n("/audio_control");
     read_parameters();
-    ros::Timer timer = n.createTimer(ros::Duration(1), read_parameters_callback);
+    ros::Timer timer = n.createTimer(ros::Duration(4), read_parameters_callback);
     ros::AsyncSpinner spinner(1); 
     spinner.start();
 

@@ -5,8 +5,7 @@
 
   </description>
   <author>Sergio Merino</author>
-  <license>BSD</license>
-  <review status="unreviewed" notes=""/>
+  <license>GPL v2</license>
   <depend package="roscpp"/>
 </package>
 
