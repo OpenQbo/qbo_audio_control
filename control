@@ -1,10 +1,10 @@
-Package: qboros-electric-system-info
-Source: qboros-electric-system-info
+Package: qboros-electric-audio-control
+Source: qboros-electric-audio-control
 Version: 1.0-openqbo0
 Priority: standard
 Architecture: amd64
 Depends:
 Maintainer: Sergio Merino <s.merino@openqbo.org>
-Homepage: http://openqbo.org/wiki/doku.php?id=qbo_apps:ros_pack:qbo_system_info
-Description: This package is a ros service to get information from the operating system
- This service can execute console commands to get important system information using ros services.
+Homepage: http://openqbo.org/wiki/doku.php?id=qbo_apps:ros_pack:qbo_audio_control
+Description: This package init the sound devices volume
+ This node init the sound device volume every time you start it and avoid it from being changed by the user.
