@@ -5,7 +5,7 @@
 
   </description>
   <author>Sergio Merino/s.merino@openqbo.org, Lennart Poettering/mzihzrgre (at) 0pointer (dot) de</author>
-  <license>GPL v2 & LGPL v2.1 </license>
+  <license>GPL v2, LGPL v2.1 </license>
   <depend package="roscpp"/>
 </package>
 
