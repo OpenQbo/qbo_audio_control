@@ -1,6 +1,6 @@
 /*
 *Copyright 2004-2007 Lennart Poettering <mzihzrgre (at) 0pointer (dot) de>
-*Copyright (C) 2012 Openqbo Inc.
+*Copyright (C) 2012 Thecorpora Inc.
 *
 *This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 *
