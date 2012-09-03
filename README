@@ -13,7 +13,7 @@ This set default volume for mic and speakers
 === Building ===
 
 To compile you have this dependencies:
-    * libpulse-dev
+    * libpulse-dev (i.e.: sudo apt-get install libpulse-dev)
 
 
 rosmake
