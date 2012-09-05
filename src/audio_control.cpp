@@ -57,6 +57,8 @@ int mic_volume=58;
 int front_volume=100;
 int master_front_volume=20;
 int mic_boost=0;
+int speaker=100;
+
 std::string default_input="Front Mic";
 
 std::vector <float> accum_values (max_accum,0);
@@ -284,6 +286,7 @@ void read_parameters(){
     nh.getParam("mic_boost",mic_boost);
     nh.getParam("front_volume",front_volume);
     nh.getParam("master_front_volume",master_front_volume);
+    nh.getParam("speaker",speaker);
 
     ROS_INFO("Threshold_to_on:%f",threshold_to_on);
     ROS_INFO("Threshold_to_off:%f",threshold_to_off);
@@ -293,6 +296,7 @@ void read_parameters(){
     ROS_INFO("Mic_boost_volume:%d%%", mic_boost);
     ROS_INFO("Front_volume:%d%%", front_volume);
     ROS_INFO("Master_front_volume:%d%%", master_front_volume);
+    ROS_INFO("Speaker volume %d%%",speaker);
 
     std::string instruction;
     instruction="amixer set 'Input Source' ";
@@ -320,6 +324,10 @@ void read_parameters(){
     instruction="amixer set 'Master' "+volume_string.str()+"%" + volume_string.str()+"%";
     system(instruction.c_str());
 
+    volume_string.str("");
+    volume_string << speaker;
+    instruction="amixer set 'Speaker' "+volume_string.str()+"%" + volume_string.str()+"%";
+    system(instruction.c_str());
 
 }
 
