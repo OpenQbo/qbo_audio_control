@@ -3,8 +3,8 @@
              <param name="threshold_to_on" value="0.0"/>
              <param name="threshold_to_off" value="0.0"/>
              <param name="max_accum" value="1"/>
-             <param name="default_input" value="Rear Mic"/> 
-<!--            <param name="default_input" value="Front Mic"/>-->
+<!--             <param name="default_input" value="Rear Mic"/> -->
+            <param name="default_input" value="Front Mic"/>
 <!--          <param name="default_input" value="Mic"/> --> 
              <param name="mic_volume" value="65"/> 
 <!--              <param name="mic_volume" value="35"/> -->
