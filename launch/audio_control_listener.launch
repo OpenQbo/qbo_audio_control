@@ -6,7 +6,7 @@
 <!--             <param name="default_input" value="Rear Mic"/> -->
             <param name="default_input" value="Front Mic"/>
 <!--          <param name="default_input" value="Mic"/> --> 
-             <param name="mic_volume" value="65"/> 
+             <param name="mic_volume" value="45"/> 
 <!--              <param name="mic_volume" value="35"/> -->
              <param name="mic_boost" value="0" />
              <param name="front_volume" value="100"/>
